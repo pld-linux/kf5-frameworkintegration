@@ -1,29 +1,25 @@
-# TODO:
-# Not packaged dirs:
-# /usr/include/KF5
-# /usr/lib/qt5/plugins/kf5
-# /usr/share/kf5/infopage
-
-%define         _state          stable
-%define		orgname		frameworkintegration
+%define         kdeframever     5.10
+%define		qtver           5.3.2
+%define		kfname		frameworkintegration
 
 Summary:	HTML rendering engine
-Name:		kf5-%{orgname}
-Version:	5.0.0
-Release:	0.1
+Name:		kf5-%{kfname}
+Version:	5.10.0
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
-Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/frameworks/%{version}/%{orgname}-%{version}.tar.xz
-# Source0-md5:	032d0a08977a457206915dbeeff0ef47
+Source0:	http://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
+# Source0-md5:	bc7b295d55fe1353ae498861b04d3b82
 URL:		http://www.kde.org/
-BuildRequires:	Qt5Core-devel >= 5.2.0
-BuildRequires:	Qt5DBus-devel
-BuildRequires:	Qt5Gui-devel >= 5.3.1
-BuildRequires:	Qt5Network-devel >= 5.2.0
-BuildRequires:	Qt5Widgets-devel
-BuildRequires:	Qt5X11Extras-devel
-BuildRequires:	Qt5Xml-devel >= 5.2.0
+BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5DBus-devel >= %{qtver}
+BuildRequires:	Qt5Gui-devel >= %{qtver}
+BuildRequires:	Qt5Network-devel >= %{qtver}
+BuildRequires:	Qt5Widgets-devel >= %{qtver}
+BuildRequires:	Qt5X11Extras-devel >= %{qtver}
+BuildRequires:	Qt5Xml-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
+BuildRequires:	fonts-TTF-KDE-Oxygen-devel
 BuildRequires:	gettext-devel
 BuildRequires:	kf5-attica-devel >= %{version}
 BuildRequires:	kf5-extra-cmake-modules >= 1.0.0
@@ -65,36 +61,25 @@ KHTML is a web rendering engine, based on the KParts technology and
 using KJS for JavaScript support.
 
 %package devel
-Summary:	Header files for %{orgname} development
-Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{orgname}
+Summary:	Header files for %{kfname} development
+Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kfname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-Header files for %{orgname} development.
+Header files for %{kfname} development.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe dla programistów używających %{orgname}.
+Pliki nagłówkowe dla programistów używających %{kfname}.
 
 %prep
-%setup -q -n %{orgname}-%{version}
+%setup -q -n %{kfname}-%{version}
 
 %build
 install -d build
 cd build
 %cmake \
-	-DBIN_INSTALL_DIR=%{_bindir} \
-	-DKCFG_INSTALL_DIR=%{_datadir}/config.kcfg \
-	-DPLUGIN_INSTALL_DIR=%{qt5dir}/plugins \
-	-DQT_PLUGIN_INSTALL_DIR=%{qt5dir}/plugins \
-	-DQML_INSTALL_DIR=%{qt5dir}/qml \
-	-DIMPORTS_INSTALL_DIR=%{qt5dirs}/imports \
-	-DSYSCONF_INSTALL_DIR=%{_sysconfdir} \
-	-DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
-	-DKF5_LIBEXEC_INSTALL_DIR=%{_libexecdir} \
-	-DKF5_INCLUDE_INSTALL_DIR=%{_includedir} \
-	-DECM_MKSPECS_INSTALL_DIR=%{qt5dir}/mkspecs/modules \
-	-D_IMPORT_PREFIX=%{_prefix} \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	../
 %{__make}
 
@@ -104,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build/ install \
         DESTDIR=$RPM_BUILD_ROOT
 
-%find_lang %{orgname}5
+%find_lang %{kfname}5
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -112,13 +97,15 @@ rm -rf $RPM_BUILD_ROOT
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files -f %{orgname}5.lang
+%files -f %{kfname}5.lang
 %defattr(644,root,root,755)
 %doc README.md
 %attr(755,root,root) %ghost %{_libdir}/libKF5Style.so.5
-%attr(755,root,root) %{_libdir}/libKF5Style.so.5.0.0
+%attr(755,root,root) %{_libdir}/libKF5Style.so.*.*
 %attr(755,root,root) %{_libdir}/qt5/plugins/kf5/FrameworkIntegrationPlugin.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/platformthemes/KDEPlatformTheme.so
+%{_datadir}/knotifications5/plasma_workspace.notifyrc
+%dir %{_datadir}/kf5/infopage
 %{_datadir}/kf5/infopage/bar-bottom-left.png
 %{_datadir}/kf5/infopage/bar-bottom-middle.png
 %{_datadir}/kf5/infopage/bar-bottom-right.png
