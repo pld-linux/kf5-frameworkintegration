@@ -1,15 +1,15 @@
-%define         kdeframever     5.39
-%define		qtver           5.3.2
+%define         kdeframever     5.53
+%define		qtver           5.9.0
 %define		kfname		frameworkintegration
 
 Summary:	HTML rendering engine
 Name:		kf5-%{kfname}
-Version:	5.39.0
-Release:	2
+Version:	5.53.0
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	e1fc63110324e5a98f967d4afe884dd6
+# Source0-md5:	9957a52e9b75dd61a62f3ad7a61e299a
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel >= %{qtver}
@@ -106,8 +106,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/knotifications5/plasma_workspace.notifyrc
 #%%{_datadir}/kconf_update/frameworksintegration-5.16-font.sh
 #%%{_datadir}/kconf_update/frameworksintegration-5.16-font.upd
-%dir %{_libdir}/kf5/kpackagehandlers
-%attr(755,root,root) %{_libdir}/kf5/kpackagehandlers/knshandler
+%dir %{_prefix}/libexec/kf5/kpackagehandlers
+%attr(755,root,root) %{_prefix}/libexec/kf5/kpackagehandlers/knshandler
 %dir %{_datadir}/kf5/infopage
 %{_datadir}/kf5/infopage/bar-bottom-left.png
 %{_datadir}/kf5/infopage/bar-bottom-middle.png
