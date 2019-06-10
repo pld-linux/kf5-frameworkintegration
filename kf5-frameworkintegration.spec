@@ -1,15 +1,15 @@
-%define         kdeframever     5.56
-%define		qtver           5.9.0
+%define		kdeframever	5.59
+%define		qtver		5.9.0
 %define		kfname		frameworkintegration
 
 Summary:	HTML rendering engine
 Name:		kf5-%{kfname}
-Version:	5.56.0
+Version:	5.59.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	5a2cc48884abc1eac8fa51b45842ff70
+# Source0-md5:	073d1b84fe1773ed6914cbc6a591ad66
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel >= %{qtver}
