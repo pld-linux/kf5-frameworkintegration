@@ -1,15 +1,15 @@
-%define		kdeframever	5.79
+%define		kdeframever	5.80
 %define		qtver		5.9.0
 %define		kfname		frameworkintegration
 
 Summary:	HTML rendering engine
 Name:		kf5-%{kfname}
-Version:	5.79.0
+Version:	5.80.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	c7c3bde5eb426f717f530ac03a19ef15
+# Source0-md5:	cf27b02df405190a4cb849f5a955c7f8
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel >= %{qtver}
@@ -99,13 +99,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.md
-%attr(755,root,root) %ghost %{_libdir}/libKF5Style.so.5
+%ghost %{_libdir}/libKF5Style.so.5
 %attr(755,root,root) %{_libdir}/libKF5Style.so.*.*
 %attr(755,root,root) %{_libdir}/qt5/plugins/kf5/FrameworkIntegrationPlugin.so
-#%%attr(755,root,root) %{_libdir}/qt5/plugins/platformthemes/KDEPlatformTheme.so
 %{_datadir}/knotifications5/plasma_workspace.notifyrc
-#%%{_datadir}/kconf_update/frameworksintegration-5.16-font.sh
-#%%{_datadir}/kconf_update/frameworksintegration-5.16-font.upd
 %dir %{_prefix}/libexec/kf5/kpackagehandlers
 %attr(755,root,root) %{_prefix}/libexec/kf5/kpackagehandlers/knshandler
 %dir %{_datadir}/kf5/infopage
@@ -136,4 +133,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/KF5/KStyle
 %{_includedir}/KF5/frameworkintegration_version.h
 %{_libdir}/cmake/KF5FrameworkIntegration
-%attr(755,root,root) %{_libdir}/libKF5Style.so
+%{_libdir}/libKF5Style.so
