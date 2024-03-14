@@ -1,25 +1,26 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeframever	5.249.0
+%define		kdeframever	5.114
 %define		qtver		5.15.2
 %define		kfname		frameworkintegration
 
 Summary:	HTML rendering engine
 Name:		kf5-%{kfname}
-Version:	5.249.0
-Release:	0.1
+Version:	5.114.0
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
-Source0:	https://download.kde.org/unstable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	9ab0de0e3b00133d2e865430f22b396d
+Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
+# Source0-md5:	f19ff3648d64709da7511cc5fb6ef717
 URL:		http://www.kde.org/
-BuildRequires:	Qt6Core-devel >= %{qtver}
-BuildRequires:	Qt6DBus-devel >= %{qtver}
-BuildRequires:	Qt6Gui-devel >= %{qtver}
-BuildRequires:	Qt6Network-devel >= %{qtver}
-BuildRequires:	Qt6Widgets-devel >= %{qtver}
-BuildRequires:	Qt6Xml-devel >= %{qtver}
+BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5DBus-devel >= %{qtver}
+BuildRequires:	Qt5Gui-devel >= %{qtver}
+BuildRequires:	Qt5Network-devel >= %{qtver}
+BuildRequires:	Qt5Widgets-devel >= %{qtver}
+BuildRequires:	Qt5X11Extras-devel >= %{qtver}
+BuildRequires:	Qt5Xml-devel >= %{qtver}
 BuildRequires:	cmake >= 3.16
 BuildRequires:	fonts-TTF-KDE-Oxygen-devel
 BuildRequires:	gettext-devel
@@ -59,7 +60,7 @@ BuildRequires:	zlib-devel
 Requires:	kf5-dirs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		qt6dir		%{_libdir}/qt6
+%define		qt5dir		%{_libdir}/qt5
 
 %description
 KHTML is a web rendering engine, based on the KParts technology and
@@ -106,16 +107,38 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.md
-%ghost %{_libdir}/libKF6Style.so.6
-%attr(755,root,root) %{_libdir}/libKF6Style.so.*.*
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/FrameworkIntegrationPlugin.so
-%{_datadir}/knotifications6/plasma_workspace.notifyrc
-%dir %{_prefix}/libexec/kf6/kpackagehandlers
-%attr(755,root,root) %{_prefix}/libexec/kf6/kpackagehandlers/knshandler
+%ghost %{_libdir}/libKF5Style.so.5
+%attr(755,root,root) %{_libdir}/libKF5Style.so.*.*
+%attr(755,root,root) %{_libdir}/qt5/plugins/kf5/FrameworkIntegrationPlugin.so
+%{_datadir}/knotifications5/plasma_workspace.notifyrc
+%dir %{_prefix}/libexec/kf5/kpackagehandlers
+%attr(755,root,root) %{_prefix}/libexec/kf5/kpackagehandlers/knshandler
+%dir %{_datadir}/kf5/infopage
+%{_datadir}/kf5/infopage/bar-bottom-left.png
+%{_datadir}/kf5/infopage/bar-bottom-middle.png
+%{_datadir}/kf5/infopage/bar-bottom-right.png
+%{_datadir}/kf5/infopage/bar-middle-left.png
+%{_datadir}/kf5/infopage/bar-middle-right.png
+%{_datadir}/kf5/infopage/bar-top-left.png
+%{_datadir}/kf5/infopage/bar-top-middle.png
+%{_datadir}/kf5/infopage/bar-top-right.png
+%{_datadir}/kf5/infopage/body-background.png
+%{_datadir}/kf5/infopage/box-bottom-left.png
+%{_datadir}/kf5/infopage/box-bottom-middle.png
+%{_datadir}/kf5/infopage/box-bottom-right.png
+%{_datadir}/kf5/infopage/box-center.png
+%{_datadir}/kf5/infopage/box-middle-left.png
+%{_datadir}/kf5/infopage/box-middle-right.png
+%{_datadir}/kf5/infopage/box-top-left.png
+%{_datadir}/kf5/infopage/box-top-middle.png
+%{_datadir}/kf5/infopage/box-top-right.png
+%{_datadir}/kf5/infopage/kde_infopage.css
+%{_datadir}/kf5/infopage/kde_infopage_rtl.css
+%{_datadir}/kf5/infopage/top-middle.png
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/KF6/KStyle
-%{_includedir}/KF6/FrameworkIntegration
-%{_libdir}/cmake/KF6FrameworkIntegration
-%{_libdir}/libKF6Style.so
+%{_includedir}/KF5/KStyle
+%{_includedir}/KF5/FrameworkIntegration
+%{_libdir}/cmake/KF5FrameworkIntegration
+%{_libdir}/libKF5Style.so
